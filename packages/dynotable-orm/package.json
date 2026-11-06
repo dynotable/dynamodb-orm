@@ -1,0 +1,110 @@
+{
+  "name": "dynotable-orm",
+  "version": "0.1.0",
+  "description": "Type-safe, fast DynamoDB ORM for TypeScript. A successor to dynamoose, validated by any Standard Schema, with a Zod adapter.",
+  "keywords": [
+    "dynamodb",
+    "dynamodb-orm",
+    "orm",
+    "odm",
+    "dynamodb-mapper",
+    "dynamoose",
+    "dynamoose-alternative",
+    "zod",
+    "standard-schema",
+    "typescript",
+    "aws"
+  ],
+  "homepage": "https://dynotable.com/orm",
+  "license": "MIT",
+  "author": "DynoTable <support@dynotable.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynotable/dynamodb-orm.git",
+    "directory": "packages/dynotable-orm"
+  },
+  "bugs": {
+    "url": "https://github.com/dynotable/dynamodb-orm/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./zod": {
+      "import": {
+        "types": "./dist/zod/index.d.ts",
+        "default": "./dist/zod/index.js"
+      },
+      "require": {
+        "types": "./dist/zod/index.d.cts",
+        "default": "./dist/zod/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "pnpm build",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "typecheck": "tsc --noEmit",
+    "check:package": "publint && attw --pack . --profile node16",
+    "equivalence:local": "tsx equivalence/local/run.ts",
+    "equivalence:sample": "tsx equivalence/local/sample.ts",
+    "bench:build": "tsdown && tsdown --config benchmarks/tsdown.config.ts",
+    "bench": "pnpm bench:build && node --expose-gc .bench/bench.js",
+    "bench:competitors": "pnpm bench:build && node --expose-gc .bench/competitors.local.js",
+    "test:bench": "pnpm bench:build && vitest run --config vitest.bench.config.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/util-dynamodb": "^3.996.9"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1111.0",
+    "zod": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@aws-sdk/client-dynamodb": "^3.782.0",
+    "@aws-sdk/client-sts": "^3.1160.0",
+    "@aws-sdk/lib-dynamodb": "~3.1159.0",
+    "@types/node": "^26.2.0",
+    "dynamodb-toolbox": "2.11.1",
+    "dynamoose": "4.2.0",
+    "electrodb": "3.9.3",
+    "fast-check": "^4.10.2",
+    "publint": "^0.3.14",
+    "tsdown": "^0.15.7",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.0",
+    "zod": "^4.0.0"
+  }
+}

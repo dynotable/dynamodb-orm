@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="586" viewBox="0 0 800 586" role="img" aria-labelledby="t d" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+<title id="t">Calls per second on a 60-attribute schema — higher is better</title>
+<desc id="d">create: dynotable-orm 23,300/s, hand-written AWS SDK 20,100/s, dynamoose 256/s. get: dynotable-orm 107,000/s, hand-written AWS SDK 84,300/s, dynamoose 281/s. update: dynotable-orm 69,400/s, hand-written AWS SDK 66,800/s, dynamoose 78.8/s. query of 100 items: dynotable-orm 1,070/s, hand-written AWS SDK 836/s, dynamoose 3.76/s.</desc>
+<text x="0" y="22" font-size="17" font-weight="600" fill="#1f2328">Calls per second on a 60-attribute schema — higher is better</text>
+<text x="0" y="46" font-size="13" fill="#59636e">CPU only: a stub client, no network. Median of 20 rounds. dynamoose 4.2.0.</text>
+<text x="0" y="64" font-size="13" fill="#59636e">Each panel has its own scale.</text>
+<text x="0" y="112" font-size="14" font-weight="600" fill="#1f2328">create</text>
+<text x="160" y="137" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">dynotable-orm</text>
+<path d="M170 122H686Q690 122 690 126V138Q690 142 686 142H170Z" fill="#2a78d6"/>
+<text x="698" y="137" font-size="13" font-weight="600" fill="#1f2328">23,300/s</text>
+<text x="160" y="165" font-size="13" fill="#1f2328" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 150H613.9488499828356Q617.9488499828356 150 617.9488499828356 154V166Q617.9488499828356 170 613.9488499828356 170H170Z" fill="#8c959f"/>
+<text x="625.9488499828356" y="165" font-size="13" fill="#1f2328">20,100/s</text>
+<text x="160" y="193" font-size="13" fill="#1f2328" text-anchor="end">dynamoose</text>
+<path d="M170 178H172.85616203226914Q175.71232406453828 178 175.71232406453828 180.85616203226914V195.14383796773086Q175.71232406453828 198 172.85616203226914 198H170Z" fill="#8c959f"/>
+<text x="183.71232406453828" y="193" font-size="13" fill="#1f2328">256/s</text>
+<line x1="170" y1="118" x2="170" y2="202" stroke="#d1d9e0" stroke-width="1"/>
+<text x="0" y="234" font-size="14" font-weight="600" fill="#1f2328">get</text>
+<text x="160" y="259" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">dynotable-orm</text>
+<path d="M170 244H686Q690 244 690 248V260Q690 264 686 264H170Z" fill="#2a78d6"/>
+<text x="698" y="259" font-size="13" font-weight="600" fill="#1f2328">107,000/s</text>
+<text x="160" y="287" font-size="13" fill="#1f2328" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 272H573.8669545471466Q577.8669545471466 272 577.8669545471466 276V288Q577.8669545471466 292 573.8669545471466 292H170Z" fill="#8c959f"/>
+<text x="585.8669545471466" y="287" font-size="13" fill="#1f2328">84,300/s</text>
+<text x="160" y="315" font-size="13" fill="#1f2328" text-anchor="end">dynamoose</text>
+<path d="M170 300H171Q172 300 172 301V319Q172 320 171 320H170Z" fill="#8c959f"/>
+<text x="180" y="315" font-size="13" fill="#1f2328">281/s</text>
+<line x1="170" y1="240" x2="170" y2="324" stroke="#d1d9e0" stroke-width="1"/>
+<text x="0" y="356" font-size="14" font-weight="600" fill="#1f2328">update</text>
+<text x="160" y="381" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">dynotable-orm</text>
+<path d="M170 366H686Q690 366 690 370V382Q690 386 686 386H170Z" fill="#2a78d6"/>
+<text x="698" y="381" font-size="13" font-weight="600" fill="#1f2328">69,400/s</text>
+<text x="160" y="409" font-size="13" fill="#1f2328" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 394H666.9498269896194Q670.9498269896194 394 670.9498269896194 398V410Q670.9498269896194 414 666.9498269896194 414H170Z" fill="#8c959f"/>
+<text x="678.9498269896194" y="409" font-size="13" fill="#1f2328">66,800/s</text>
+<text x="160" y="437" font-size="13" fill="#1f2328" text-anchor="end">dynamoose</text>
+<path d="M170 422H171Q172 422 172 423V441Q172 442 171 442H170Z" fill="#8c959f"/>
+<text x="180" y="437" font-size="13" fill="#1f2328">78.8/s</text>
+<line x1="170" y1="362" x2="170" y2="446" stroke="#d1d9e0" stroke-width="1"/>
+<text x="0" y="478" font-size="14" font-weight="600" fill="#1f2328">query of 100 items</text>
+<text x="160" y="503" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">dynotable-orm</text>
+<path d="M170 488H686Q690 488 690 492V504Q690 508 686 508H170Z" fill="#2a78d6"/>
+<text x="698" y="503" font-size="13" font-weight="600" fill="#1f2328">1,070/s</text>
+<text x="160" y="531" font-size="13" fill="#1f2328" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 516H573.0411985018727Q577.0411985018727 516 577.0411985018727 520V532Q577.0411985018727 536 573.0411985018727 536H170Z" fill="#8c959f"/>
+<text x="585.0411985018727" y="531" font-size="13" fill="#1f2328">836/s</text>
+<text x="160" y="559" font-size="13" fill="#1f2328" text-anchor="end">dynamoose</text>
+<path d="M170 544H171Q172 544 172 545V563Q172 564 171 564H170Z" fill="#8c959f"/>
+<text x="180" y="559" font-size="13" fill="#1f2328">3.76/s</text>
+<line x1="170" y1="484" x2="170" y2="568" stroke="#d1d9e0" stroke-width="1"/>
+</svg>

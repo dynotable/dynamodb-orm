@@ -1,0 +1,1 @@
+{"extends": "../tsconfig.base.json", "include": ["output"], "compilerOptions": {"paths": {"#models": ["../models/orm.ts"], "#db": ["../models/orm-db.ts"], "#built": ["../models/orm-built.d.ts"]}}}

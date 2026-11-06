@@ -1,0 +1,597 @@
+{
+  "id": {
+    "S": "0123456789abcdef0123456789abcdef01234567"
+  },
+  "orderNumber": {
+    "S": "0123456789abcdef0123456789abcdef01234567"
+  },
+  "channel": {
+    "S": "WEB"
+  },
+  "cartId": {
+    "S": "a1b2c3d4e5f60718293a4b5c6d7e8f90"
+  },
+  "externalOrderId": {
+    "S": "100200300400"
+  },
+  "storeId": {
+    "S": "00000000-0000-4000-8000-000000000002"
+  },
+  "status": {
+    "S": "PAID"
+  },
+  "statusCode": {
+    "S": "P000"
+  },
+  "statusMessage": {
+    "S": "Payment captured"
+  },
+  "fulfillmentStatusCode": {
+    "S": "0"
+  },
+  "fulfillmentStatusMessage": {
+    "S": "Waiting for packing"
+  },
+  "carrierStatusCode": {
+    "S": "00"
+  },
+  "carrierStatusMessage": {
+    "S": "Label created"
+  },
+  "customerId": {
+    "S": "00000000-0000-4000-8000-000000000001"
+  },
+  "sellerId": {
+    "S": "00000000-0000-4000-8000-000000000003"
+  },
+  "relatedOrders": {
+    "SS": ["fedcba9876543210fedcba9876543210fedcba98"]
+  },
+  "lastReturnId": {
+    "S": "fedcba9876543210fedcba9876543210fedcba98"
+  },
+  "paymentMethodId": {
+    "S": "1111111111111111111111111111111111111111"
+  },
+  "savePaymentMethod": {
+    "BOOL": false
+  },
+  "autoReorder": {
+    "BOOL": true
+  },
+  "details": {
+    "M": {
+      "amount": {
+        "N": "4250"
+      },
+      "amountUSD": {
+        "N": "4250"
+      },
+      "currency": {
+        "S": "USD"
+      },
+      "billingAddress": {
+        "M": {
+          "name": {
+            "S": "Jane Tester"
+          },
+          "email": {
+            "S": "jane.tester@example.com"
+          },
+          "phone": {
+            "S": "+10000000000"
+          },
+          "address": {
+            "M": {
+              "line1": {
+                "S": "1 Example Street"
+              },
+              "city": {
+                "S": "Springfield"
+              },
+              "state": {
+                "S": "IL"
+              },
+              "zip": {
+                "S": "62701"
+              },
+              "country": {
+                "S": "US"
+              }
+            }
+          }
+        }
+      },
+      "shippingAddress": {
+        "M": {
+          "name": {
+            "S": "Jane Tester"
+          },
+          "address": {
+            "M": {
+              "line1": {
+                "S": "1 Example Street"
+              },
+              "city": {
+                "S": "Springfield"
+              },
+              "state": {
+                "S": "IL"
+              },
+              "zip": {
+                "S": "62701"
+              },
+              "country": {
+                "S": "US"
+              }
+            }
+          }
+        }
+      },
+      "shippingMethod": {
+        "S": "standard"
+      },
+      "confirmationUrl": {
+        "S": "https://store.example.com/orders/confirmation"
+      },
+      "cancelUrl": {
+        "S": "https://store.example.com/cart"
+      },
+      "customer": {
+        "M": {
+          "name": {
+            "S": "Jane Tester"
+          },
+          "email": {
+            "S": "jane.tester@example.com"
+          },
+          "phone": {
+            "S": "+10000000000"
+          }
+        }
+      },
+      "description": {
+        "S": "Order 100200300400"
+      },
+      "externalOrderId": {
+        "S": "100200300400"
+      },
+      "lines": {
+        "L": [
+          {
+            "M": {
+              "sku": {
+                "S": "SKU-1001"
+              },
+              "name": {
+                "S": "Coffee mug"
+              },
+              "quantity": {
+                "N": "2"
+              },
+              "unitPrice": {
+                "N": "1200"
+              },
+              "tax": {
+                "N": "192"
+              }
+            }
+          },
+          {
+            "M": {
+              "sku": {
+                "S": "SKU-2002"
+              },
+              "name": {
+                "S": "Tea towel"
+              },
+              "quantity": {
+                "N": "1"
+              },
+              "unitPrice": {
+                "N": "1850"
+              },
+              "tax": {
+                "N": "148"
+              }
+            }
+          }
+        ]
+      },
+      "discounts": {
+        "L": [
+          {
+            "M": {
+              "code": {
+                "S": "WELCOME10"
+              },
+              "amount": {
+                "N": "305"
+              }
+            }
+          }
+        ]
+      },
+      "store": {
+        "M": {
+          "name": {
+            "S": "EXAMPLE STORE"
+          },
+          "country": {
+            "S": "US"
+          }
+        }
+      },
+      "expireAt": {
+        "N": "1760500000"
+      },
+      "riskScore": {
+        "N": "12.5"
+      },
+      "metadata": {
+        "M": {
+          "cartId": {
+            "S": "cart-1001"
+          },
+          "campaign": {
+            "S": "autumn"
+          }
+        }
+      }
+    }
+  },
+  "browserContext": {
+    "M": {
+      "ip": {
+        "S": "192.0.2.10"
+      },
+      "userAgent": {
+        "S": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+      },
+      "countryCode": {
+        "S": "US"
+      },
+      "lang": {
+        "S": "en"
+      },
+      "deviceType": {
+        "S": "desktop"
+      },
+      "browser": {
+        "S": "Chrome"
+      },
+      "browserVersion": {
+        "S": "129.0.0.0"
+      },
+      "browserAccept": {
+        "S": "text/html,application/xhtml+xml"
+      },
+      "os": {
+        "S": "Mac OS"
+      },
+      "osVersion": {
+        "S": "10.15.7"
+      },
+      "colorDepth": {
+        "S": "24"
+      },
+      "screenHeight": {
+        "S": "1117"
+      },
+      "screenWidth": {
+        "S": "1728"
+      },
+      "timezoneOffset": {
+        "S": "300"
+      },
+      "timezoneName": {
+        "S": "America/Chicago"
+      },
+      "languages": {
+        "S": "en-US,en"
+      },
+      "fingerprint": {
+        "S": "0f1e2d3c4b5a69788796a5b4c3d2e1f0"
+      },
+      "sessionId": {
+        "S": "a1b2c3d4e5f60718293a4b5c6d7e8f90"
+      }
+    }
+  },
+  "requestContext": {
+    "M": {
+      "ip": {
+        "S": "192.0.2.20"
+      },
+      "userAgent": {
+        "S": "ExampleClient/2.4.0"
+      },
+      "source": {
+        "S": "ExampleClient"
+      },
+      "sourceVersion": {
+        "S": "2.4.0"
+      },
+      "countryCode": {
+        "S": "US"
+      },
+      "apiKeyId": {
+        "S": "key_000000"
+      }
+    }
+  },
+  "checkoutOpenedAt": {
+    "N": "1760400030"
+  },
+  "cartSnapshot": {
+    "M": {
+      "lines": {
+        "L": [
+          {
+            "M": {
+              "sku": {
+                "S": "SKU-1001"
+              },
+              "name": {
+                "S": "Coffee mug"
+              },
+              "quantity": {
+                "N": "2"
+              },
+              "unitPrice": {
+                "N": "1200"
+              },
+              "tax": {
+                "N": "192"
+              }
+            }
+          },
+          {
+            "M": {
+              "sku": {
+                "S": "SKU-2002"
+              },
+              "name": {
+                "S": "Tea towel"
+              },
+              "quantity": {
+                "N": "1"
+              },
+              "unitPrice": {
+                "N": "1850"
+              },
+              "tax": {
+                "N": "148"
+              }
+            }
+          }
+        ]
+      },
+      "currency": {
+        "S": "USD"
+      },
+      "subtotal": {
+        "N": "4250"
+      },
+      "customer": {
+        "M": {
+          "name": {
+            "S": "Jane Tester"
+          },
+          "email": {
+            "S": "jane.tester@example.com"
+          },
+          "phone": {
+            "S": "+10000000000"
+          }
+        }
+      },
+      "allowedShippingMethods": {
+        "L": [
+          {
+            "S": "standard"
+          },
+          {
+            "S": "express"
+          },
+          {
+            "S": "pickup"
+          }
+        ]
+      }
+    }
+  },
+  "pricingRequest": {
+    "M": {
+      "orderId": {
+        "S": "0123456789abcdef0123456789abcdef01234567"
+      },
+      "currency": {
+        "S": "USD"
+      },
+      "lines": {
+        "L": [
+          {
+            "M": {
+              "sku": {
+                "S": "SKU-1001"
+              },
+              "quantity": {
+                "N": "2"
+              }
+            }
+          },
+          {
+            "M": {
+              "sku": {
+                "S": "SKU-2002"
+              },
+              "quantity": {
+                "N": "1"
+              }
+            }
+          }
+        ]
+      },
+      "destination": {
+        "M": {
+          "country": {
+            "S": "US"
+          },
+          "zip": {
+            "S": "62701"
+          }
+        }
+      },
+      "coupon": {
+        "S": "WELCOME10"
+      }
+    }
+  },
+  "pricingResponse": {
+    "M": {
+      "subtotal": {
+        "N": "4250"
+      },
+      "discount": {
+        "N": "305"
+      },
+      "tax": {
+        "N": "340"
+      },
+      "shipping": {
+        "N": "499"
+      },
+      "total": {
+        "N": "4784"
+      },
+      "currency": {
+        "S": "USD"
+      },
+      "rates": {
+        "M": {
+          "tax": {
+            "S": "0.0800"
+          },
+          "region": {
+            "S": "US-IL"
+          }
+        }
+      },
+      "raw": {
+        "M": {
+          "r1": {
+            "S": "0123456789abcdef0123456789abcdef01234567"
+          },
+          "r2": {
+            "S": "4784"
+          },
+          "r3": {
+            "S": "USD"
+          },
+          "r4": {
+            "S": "0"
+          },
+          "r5": {
+            "S": "ok"
+          }
+        }
+      }
+    }
+  },
+  "carrierTrackingId": {
+    "S": "22222222222222222222222222222222"
+  },
+  "confirmationResponse": {
+    "M": {
+      "id": {
+        "S": "0123456789abcdef0123456789abcdef01234567"
+      },
+      "amount": {
+        "N": "4784"
+      },
+      "currency": {
+        "S": "USD"
+      },
+      "externalOrderId": {
+        "S": "100200300400"
+      },
+      "customerId": {
+        "S": "00000000-0000-4000-8000-000000000001"
+      },
+      "status": {
+        "S": "PAID"
+      },
+      "statusCode": {
+        "S": "P000"
+      },
+      "statusMessage": {
+        "S": "Payment captured"
+      },
+      "customer": {
+        "M": {
+          "name": {
+            "S": "Jane Tester"
+          },
+          "email": {
+            "S": "jane.tester@example.com"
+          },
+          "phone": {
+            "S": "+10000000000"
+          }
+        }
+      },
+      "store": {
+        "M": {
+          "name": {
+            "S": "EXAMPLE STORE"
+          },
+          "country": {
+            "S": "US"
+          }
+        }
+      },
+      "nextAction": {
+        "M": {
+          "type": {
+            "S": "COMPLETE"
+          },
+          "redirectUrl": {
+            "S": "https://store.example.com/orders/0123456789abcdef0123456789abcdef01234567"
+          }
+        }
+      },
+      "createdAt": {
+        "N": "1760400000"
+      },
+      "updatedAt": {
+        "N": "1760400060"
+      }
+    }
+  },
+  "notification": {
+    "M": {
+      "status": {
+        "S": "SENT"
+      },
+      "statusCode": {
+        "S": "200"
+      }
+    }
+  },
+  "emailReceiptSent": {
+    "BOOL": true
+  },
+  "guestCheckout": {
+    "BOOL": true
+  },
+  "expireAt": {
+    "N": "3299040211"
+  },
+  "createdAt": {
+    "S": "2026-01-02T03:04:05.999Z"
+  },
+  "updatedAt": {
+    "S": "2026-01-02T03:04:05.999Z"
+  }
+}

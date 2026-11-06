@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "src",
+    "scripts",
+    "tests/*.ts",
+    "tests/integration",
+    "vitest.config.ts",
+    "vitest.integration.config.ts",
+    "tsdown.config.ts"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@acme/dynamoose": ["./node_modules/dynamoose/dist/index.d.ts"],
+      "@acme/dynamoose/dist/*": ["./node_modules/dynamoose/dist/*"]
+    }
+  }
+}

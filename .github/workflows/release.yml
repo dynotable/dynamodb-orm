@@ -1,0 +1,69 @@
+name: Release
+
+# Publishes ONE workspace package to npm when its tag is pushed:
+#   dynotable-orm@<version>          -> packages/dynotable-orm
+#   dynotable-orm-codemod@<version>  -> packages/codemod
+#
+# npm Trusted Publishing (OIDC): no npm token is stored in this repository.
+# Each package needs its OWN Trusted Publisher on npmjs.com, because npm
+# configures it per package:
+#   npmjs.com -> <package> -> Settings -> Trusted Publisher -> GitHub Actions
+#   organization/user: dynotable, repository: dynamodb-orm, workflow: release.yml
+# The first publish of each package is manual (a package must exist before a
+# Trusted Publisher can be attached). Every later publish goes through here.
+#
+# Provenance is requested only by the --provenance flag below, never by
+# publishConfig or .npmrc: a provenance default breaks local publishes.
+
+on:
+  push:
+    tags:
+      - 'dynotable-orm@*'
+      - 'dynotable-orm-codemod@*'
+
+permissions:
+  contents: read
+  id-token: write # OIDC for npm Trusted Publishing + provenance
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Resolve package from tag and check its version
+        id: pkg
+        run: |
+          TAG="$GITHUB_REF_NAME"
+          PKG="${TAG%@*}"
+          VERSION="${TAG##*@}"
+          case "$PKG" in
+            dynotable-orm) DIR=packages/dynotable-orm ;;
+            dynotable-orm-codemod) DIR=packages/codemod ;;
+            *) echo "unknown package in tag '$TAG'" >&2; exit 1 ;;
+          esac
+          NAME="$(node -p "require('./$DIR/package.json').name")"
+          MANIFEST="$(node -p "require('./$DIR/package.json').version")"
+          if [ "$NAME" != "$PKG" ]; then
+            echo "tag package '$PKG' != $DIR/package.json name '$NAME'" >&2
+            exit 1
+          fi
+          if [ "$MANIFEST" != "$VERSION" ]; then
+            echo "tag version '$VERSION' != $DIR/package.json version '$MANIFEST'" >&2
+            exit 1
+          fi
+          echo "name=$PKG" >> "$GITHUB_OUTPUT"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm check:package
+      # A tag checkout is a detached HEAD, which pnpm's branch check rejects.
+      - run: pnpm publish --filter ${{ steps.pkg.outputs.name }} --provenance --access public --no-git-checks

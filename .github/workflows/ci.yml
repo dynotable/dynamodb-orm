@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm check
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm check:package
+      # The gate's verdict tests, so a push to main runs them too (the timed gate runs on pull requests only).
+      - run: pnpm test:bench
+
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      dynamodb:
+        # The image's default command has no -sharedDb, so each access key and region is a separate
+        # database: the per-call client test depends on it.
+        image: amazon/dynamodb-local:3.3.2
+        ports:
+          - 8000:8000
+        # Any HTTP answer (DynamoDB Local returns 400 on GET /) means it accepts requests.
+        options: >-
+          --health-cmd "curl -s -o /dev/null http://localhost:8000"
+          --health-interval 2s
+          --health-timeout 2s
+          --health-retries 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:integration
+
+  # The benchmark gate (packages/dynotable-orm/benchmarks/README.md): this pull request against its base build.
+  bench:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          path: head
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+        with:
+          package_json_file: head/package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: head/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: head
+      # A base without the bench (the first pull request holds no package yet): bench.ts skips the regression rule.
+      - name: Build the base
+        working-directory: base
+        run: |
+          if [ -f packages/dynotable-orm/benchmarks/bench.ts ]; then
+            pnpm install --frozen-lockfile && pnpm --filter dynotable-orm build
+          else
+            echo "the base has no bench: nothing to build"
+          fi
+      - name: Benchmark gate (pull request vs base)
+        working-directory: head
+        env:
+          BASELINE: ${{ github.workspace }}/base/packages/dynotable-orm
+        run: pnpm bench --gate

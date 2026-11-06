@@ -1,0 +1,84 @@
+{
+  "name": "dynotable-orm-codemod",
+  "version": "0.1.0",
+  "description": "Codemod that migrates dynamoose code and schemas to dynotable-orm and Zod.",
+  "keywords": [
+    "dynamodb",
+    "dynamodb-orm",
+    "dynamoose",
+    "dynamoose-alternative",
+    "dynotable-orm",
+    "codemod",
+    "migration",
+    "zod",
+    "typescript"
+  ],
+  "homepage": "https://dynotable.com/orm",
+  "license": "MIT",
+  "author": "DynoTable <support@dynotable.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynotable/dynamodb-orm.git",
+    "directory": "packages/codemod"
+  },
+  "bugs": {
+    "url": "https://github.com/dynotable/dynamodb-orm/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "dynotable-orm-codemod": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./dist/bin.js",
+    "./dist/bin.cjs"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "pnpm build",
+    "test": "pnpm --filter dynotable-orm build && vitest run",
+    "test:integration": "pnpm --filter dynotable-orm build && vitest run --config vitest.integration.config.ts",
+    "typecheck": "pnpm --filter dynotable-orm build && tsc --noEmit",
+    "check:package": "publint && attw --pack . --profile node16"
+  },
+  "dependencies": {
+    "ts-morph": "^28.0.0"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@aws-sdk/client-dynamodb": "^3.1159.0",
+    "@types/node": "^26.2.0",
+    "dynamoose": "4.2.0",
+    "dynotable-orm": "workspace:*",
+    "publint": "^0.3.14",
+    "tsdown": "^0.15.7",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12",
+    "zod": "^4.6.7"
+  }
+}

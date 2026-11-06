@@ -1,0 +1,1 @@
+{"extends": "../tsconfig.base.json", "include": ["output"], "compilerOptions": {"paths": {"#models": ["../models/dynamoose.ts"], "@acme/dynamoose": ["../../../node_modules/dynamoose/dist/index.d.ts"], "@acme/dynamoose/dist/*": ["../../../node_modules/dynamoose/dist/*"]}}}

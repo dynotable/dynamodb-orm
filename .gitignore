@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.bench/
+.equivalence-local/
+docs/plans/
+packages/codemod/tests/.work-*/
+packages/dynotable-orm/equivalence/local/summary.md

@@ -1,0 +1,27 @@
+{
+  "name": "dynotable-orm-workspace",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:integration": "pnpm -r test:integration",
+    "lint": "oxlint packages",
+    "format": "oxfmt",
+    "check": "oxfmt --check",
+    "typecheck": "pnpm -r typecheck",
+    "check:package": "pnpm -r build && pnpm -r check:package",
+    "equivalence:local": "pnpm --filter dynotable-orm equivalence:local",
+    "equivalence:sample": "pnpm --filter dynotable-orm equivalence:sample",
+    "bench": "pnpm --filter dynotable-orm bench",
+    "test:bench": "pnpm --filter dynotable-orm test:bench"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.35.0"
+  }
+}

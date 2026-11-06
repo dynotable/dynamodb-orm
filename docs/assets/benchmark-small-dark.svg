@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="810" viewBox="0 0 800 810" role="img" aria-labelledby="t d" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+<title id="t">Calls per second on a 5-attribute schema — higher is better</title>
+<desc id="d">create: dynotable-orm 625,000/s, hand-written AWS SDK 719,000/s, dynamoose 5,240/s, ElectroDB 29,100/s, dynamodb-toolbox 87,000/s. get: dynotable-orm 1,490,000/s, hand-written AWS SDK 1,070,000/s, dynamoose 3,940/s, ElectroDB 46,300/s, dynamodb-toolbox 110,000/s. update: dynotable-orm 671,000/s, hand-written AWS SDK 1,030,000/s, dynamoose 4,200/s, ElectroDB 28,800/s, dynamodb-toolbox 66,200/s. query of 100 items: dynotable-orm 35,300/s, hand-written AWS SDK 37,700/s, dynamoose 159/s, ElectroDB 5,780/s, dynamodb-toolbox 2,170/s.</desc>
+<text x="0" y="22" font-size="17" font-weight="600" fill="#e6edf3">Calls per second on a 5-attribute schema — higher is better</text>
+<text x="0" y="46" font-size="13" fill="#9198a1">CPU only: a stub client, no network. One run of 10 rounds. dynamoose 4.2.0,</text>
+<text x="0" y="64" font-size="13" fill="#9198a1">ElectroDB 3.9.3, dynamodb-toolbox 2.11.1. Each panel has its own scale.</text>
+<text x="0" y="112" font-size="14" font-weight="600" fill="#e6edf3">create</text>
+<text x="160" y="137" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="end">dynotable-orm</text>
+<path d="M170 122H617.75Q621.75 122 621.75 126V138Q621.75 142 617.75 142H170Z" fill="#3987e5"/>
+<text x="629.75" y="137" font-size="13" font-weight="600" fill="#e6edf3">625,000/s</text>
+<text x="160" y="165" font-size="13" fill="#e6edf3" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 150H686Q690 150 690 154V166Q690 170 686 170H170Z" fill="#6e7681"/>
+<text x="698" y="165" font-size="13" fill="#e6edf3">719,000/s</text>
+<text x="160" y="193" font-size="13" fill="#e6edf3" text-anchor="end">dynamoose</text>
+<path d="M170 178H171.89214659685865Q173.78429319371728 178 173.78429319371728 179.89214659685865V196.10785340314135Q173.78429319371728 198 171.89214659685865 198H170Z" fill="#6e7681"/>
+<text x="181.78429319371728" y="193" font-size="13" fill="#e6edf3">5,240/s</text>
+<text x="160" y="221" font-size="13" fill="#e6edf3" text-anchor="end">ElectroDB</text>
+<path d="M170 206H187.01162790697674Q191.01162790697674 206 191.01162790697674 210V222Q191.01162790697674 226 187.01162790697674 226H170Z" fill="#6e7681"/>
+<text x="199.01162790697674" y="221" font-size="13" fill="#e6edf3">29,100/s</text>
+<text x="160" y="249" font-size="13" fill="#e6edf3" text-anchor="end">dynamodb-toolbox</text>
+<path d="M170 234H228.8521739130435Q232.8521739130435 234 232.8521739130435 238V250Q232.8521739130435 254 228.8521739130435 254H170Z" fill="#6e7681"/>
+<text x="240.8521739130435" y="249" font-size="13" fill="#e6edf3">87,000/s</text>
+<line x1="170" y1="118" x2="170" y2="258" stroke="#3d444d" stroke-width="1"/>
+<text x="0" y="290" font-size="14" font-weight="600" fill="#e6edf3">get</text>
+<text x="160" y="315" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="end">dynotable-orm</text>
+<path d="M170 300H686Q690 300 690 304V316Q690 320 686 320H170Z" fill="#3987e5"/>
+<text x="698" y="315" font-size="13" font-weight="600" fill="#e6edf3">1,490,000/s</text>
+<text x="160" y="343" font-size="13" fill="#e6edf3" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 328H539.1764705882354Q543.1764705882354 328 543.1764705882354 332V344Q543.1764705882354 348 539.1764705882354 348H170Z" fill="#6e7681"/>
+<text x="551.1764705882354" y="343" font-size="13" fill="#e6edf3">1,070,000/s</text>
+<text x="160" y="371" font-size="13" fill="#e6edf3" text-anchor="end">dynamoose</text>
+<path d="M170 356H171Q172 356 172 357V375Q172 376 171 376H170Z" fill="#6e7681"/>
+<text x="180" y="371" font-size="13" fill="#e6edf3">3,940/s</text>
+<text x="160" y="399" font-size="13" fill="#e6edf3" text-anchor="end">ElectroDB</text>
+<path d="M170 384H182.1537037037037Q186.1537037037037 384 186.1537037037037 388V400Q186.1537037037037 404 182.1537037037037 404H170Z" fill="#6e7681"/>
+<text x="194.1537037037037" y="399" font-size="13" fill="#e6edf3">46,300/s</text>
+<text x="160" y="427" font-size="13" fill="#e6edf3" text-anchor="end">dynamodb-toolbox</text>
+<path d="M170 412H204.4273127753304Q208.4273127753304 412 208.4273127753304 416V428Q208.4273127753304 432 204.4273127753304 432H170Z" fill="#6e7681"/>
+<text x="216.4273127753304" y="427" font-size="13" fill="#e6edf3">110,000/s</text>
+<line x1="170" y1="296" x2="170" y2="436" stroke="#3d444d" stroke-width="1"/>
+<text x="0" y="468" font-size="14" font-weight="600" fill="#e6edf3">update</text>
+<text x="160" y="493" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="end">dynotable-orm</text>
+<path d="M170 478H505.2214765100671Q509.2214765100671 478 509.2214765100671 482V494Q509.2214765100671 498 505.2214765100671 498H170Z" fill="#3987e5"/>
+<text x="517.2214765100671" y="493" font-size="13" font-weight="600" fill="#e6edf3">671,000/s</text>
+<text x="160" y="521" font-size="13" fill="#e6edf3" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 506H686Q690 506 690 510V522Q690 526 686 526H170Z" fill="#6e7681"/>
+<text x="698" y="521" font-size="13" fill="#e6edf3">1,030,000/s</text>
+<text x="160" y="549" font-size="13" fill="#e6edf3" text-anchor="end">dynamoose</text>
+<path d="M170 534H171.06184873949582Q172.1236974789916 534 172.1236974789916 535.0618487394958V552.9381512605042Q172.1236974789916 554 171.06184873949582 554H170Z" fill="#6e7681"/>
+<text x="180.1236974789916" y="549" font-size="13" fill="#e6edf3">4,200/s</text>
+<text x="160" y="577" font-size="13" fill="#e6edf3" text-anchor="end">ElectroDB</text>
+<path d="M170 562H180.56599423631124Q184.56599423631124 562 184.56599423631124 566V578Q184.56599423631124 582 180.56599423631124 582H170Z" fill="#6e7681"/>
+<text x="192.56599423631124" y="577" font-size="13" fill="#e6edf3">28,800/s</text>
+<text x="160" y="605" font-size="13" fill="#e6edf3" text-anchor="end">dynamodb-toolbox</text>
+<path d="M170 590H199.4728476821192Q203.4728476821192 590 203.4728476821192 594V606Q203.4728476821192 610 199.4728476821192 610H170Z" fill="#6e7681"/>
+<text x="211.4728476821192" y="605" font-size="13" fill="#e6edf3">66,200/s</text>
+<line x1="170" y1="474" x2="170" y2="614" stroke="#3d444d" stroke-width="1"/>
+<text x="0" y="646" font-size="14" font-weight="600" fill="#e6edf3">query of 100 items</text>
+<text x="160" y="671" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="end">dynotable-orm</text>
+<path d="M170 656H652.9257950530034Q656.9257950530034 656 656.9257950530034 660V672Q656.9257950530034 676 652.9257950530034 676H170Z" fill="#3987e5"/>
+<text x="664.9257950530034" y="671" font-size="13" font-weight="600" fill="#e6edf3">35,300/s</text>
+<text x="160" y="699" font-size="13" fill="#e6edf3" text-anchor="end">hand-written AWS SDK</text>
+<path d="M170 684H686Q690 684 690 688V700Q690 704 686 704H170Z" fill="#6e7681"/>
+<text x="698" y="699" font-size="13" fill="#e6edf3">37,700/s</text>
+<text x="160" y="727" font-size="13" fill="#e6edf3" text-anchor="end">dynamoose</text>
+<path d="M170 712H171.0953895071542Q172.19077901430842 712 172.19077901430842 713.0953895071542V730.9046104928458Q172.19077901430842 732 171.0953895071542 732H170Z" fill="#6e7681"/>
+<text x="180.19077901430842" y="727" font-size="13" fill="#e6edf3">159/s</text>
+<text x="160" y="755" font-size="13" fill="#e6edf3" text-anchor="end">ElectroDB</text>
+<path d="M170 740H245.65317919075144Q249.65317919075144 740 249.65317919075144 744V756Q249.65317919075144 760 245.65317919075144 760H170Z" fill="#6e7681"/>
+<text x="257.6531791907514" y="755" font-size="13" fill="#e6edf3">5,780/s</text>
+<text x="160" y="783" font-size="13" fill="#e6edf3" text-anchor="end">dynamodb-toolbox</text>
+<path d="M170 768H195.95652173913044Q199.95652173913044 768 199.95652173913044 772V784Q199.95652173913044 788 195.95652173913044 788H170Z" fill="#6e7681"/>
+<text x="207.95652173913044" y="783" font-size="13" fill="#e6edf3">2,170/s</text>
+<line x1="170" y1="652" x2="170" y2="792" stroke="#3d444d" stroke-width="1"/>
+</svg>
