@@ -2,6 +2,17 @@
 
 All notable changes to `dynotable-orm` and `dynotable-orm-codemod` are recorded here.
 
+## 0.1.1
+
+### dynotable-orm
+
+- A schema from Zod's `z.compile()` (Zod 4.5 or later) is supported as a model schema, with its field marks.
+  A test now covers it.
+
+### dynotable-orm-codemod
+
+- No changes. Released with the library through the tag workflow.
+
 ## 0.1.0
 
 The first release of both packages. Pre-release: the API may still change before 1.0.

@@ -1,6 +1,6 @@
 {
   "name": "dynotable-orm-codemod",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Codemod that migrates dynamoose code and schemas to dynotable-orm and Zod.",
   "keywords": [
     "dynamodb",

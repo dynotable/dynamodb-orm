@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import {z} from 'zod';
-import {ConfigError} from '../../src/errors.js';
+import {ConfigError, ValidationError} from '../../src/errors.js';
 import {model} from '../../src/model.js';
 import {resolveMetadata} from '../../src/plan.js';
 import {combine, getDynamoMeta, hashKey, index, rangeKey, storage} from '../../src/zod/index.js';
@@ -37,6 +37,32 @@ describe('getDynamoMeta', () => {
     expect(getDynamoMeta(base)).toBeUndefined();
     expect(getDynamoMeta(key)).toStrictEqual({hashKey: true});
     expect(getDynamoMeta(indexed)).toStrictEqual({hashKey: true, index: [{name: 'byId'}]});
+  });
+});
+
+// z.compile() (Zod 4.5+) returns a new schema instance that shares the def. Field marks live in the def, so they
+// survive; a mark kept per instance would silently drop the keys and the Date storage.
+describe('a schema from z.compile()', () => {
+  const schema = z.compile(
+    z.object({
+      id: hashKey(z.string().min(2)),
+      at: storage(z.date(), 'seconds'),
+      n: z.number().default(3)
+    })
+  );
+
+  it('keeps the field marks and still validates', async () => {
+    const M = model('T', schema);
+    expect(
+      (await M.create({id: 'ab', at: new Date(1500)}, {return: 'request'})).Item
+    ).toStrictEqual({
+      id: {S: 'ab'},
+      at: {N: '2'},
+      n: {N: '3'}
+    });
+    await expect(M.create({id: 'a', at: new Date(0)}, {return: 'request'})).rejects.toThrow(
+      ValidationError
+    );
   });
 });
 

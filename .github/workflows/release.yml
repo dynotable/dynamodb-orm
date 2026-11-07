@@ -65,5 +65,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm check:package
-      # A tag checkout is a detached HEAD, which pnpm's branch check rejects.
-      - run: pnpm publish --filter ${{ steps.pkg.outputs.name }} --provenance --access public --no-git-checks
+      # pnpm pack rewrites `workspace:*`; npm publishes, because OIDC publishing broke in the pnpm 11 rewrite
+      # (pnpm/pnpm#11513) and npm is the client npm documents for Trusted Publishing.
+      - run: pnpm --filter ${{ steps.pkg.outputs.name }} pack --pack-destination "$RUNNER_TEMP/pkg"
+      - run: npm publish "$RUNNER_TEMP"/pkg/*.tgz --provenance --access public

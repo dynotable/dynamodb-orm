@@ -124,6 +124,9 @@ A setting that a field and an option both give, with different values, throws a 
 `combine(z.string(), ['a', 'b'], '#')` makes a field the join of other fields, as dynamoose's `COMBINE`
 type does. The separator defaults to `,`.
 
+A schema from `z.compile()` (Zod 4.5 or later) works as a model schema and keeps its marks. Compile the
+object after you mark its fields, because a mark returns a new, uncompiled schema.
+
 ## Model options
 
 | option                | what it does                                                                                             |
