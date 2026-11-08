@@ -1,7 +1,7 @@
 {
   "name": "dynotable-orm",
   "version": "0.1.1",
-  "description": "Type-safe, fast DynamoDB ORM for TypeScript. A successor to dynamoose, validated by any Standard Schema, with a Zod adapter.",
+  "description": "Type-safe DynamoDB ORM for TypeScript and a dynamoose alternative: models from Zod or any Standard Schema, typed keys, updates and queries, and a codemod from dynamoose.",
   "keywords": [
     "dynamodb",
     "dynamodb-orm",

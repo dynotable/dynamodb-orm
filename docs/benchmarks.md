@@ -8,10 +8,12 @@ How to run the benchmark, and the details of each contender and operation, are i
 
 ## Results
 
-**On a schema of about 60 attributes, dynotable-orm is 93 to 854 times faster than dynamoose 4.2.0 on create,
-get and update, and 288 times faster on a query of 100 items. It is also as fast as hand-written AWS SDK
-code, or faster. On a 5-attribute schema, hand-written SDK code is faster than dynotable-orm on create,
-update and query.**
+**A create or update on a schema of about 60 attributes is 93 to 854 times faster than dynamoose 4.2.0, and
+as fast as hand-written AWS SDK code or faster. On a 5-attribute schema, hand-written SDK code is faster on
+some calls.**
+
+On get and query, dynamoose 4.2.0 type-checks each attribute of every item it reads. dynotable-orm runs no
+check on read, so those rows compare different work.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/benchmark-order-dark.svg">

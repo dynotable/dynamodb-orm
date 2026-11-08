@@ -1,6 +1,7 @@
 # dynotable-orm
 
-A type-safe, fast DynamoDB ORM for TypeScript, and a successor to dynamoose. Whole-item writes and top-level
+A type-safe, fast DynamoDB ORM for TypeScript and a dynamoose alternative. Define each model with Zod or any
+Standard Schema, and keys, updates, conditions and queries are typed from it. Whole-item writes and top-level
 updates store the same bytes as dynamoose 4.2.0; an update of a nested path does not (see the migration
 guide).
 

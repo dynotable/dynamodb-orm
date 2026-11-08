@@ -1,6 +1,8 @@
-# dynotable-orm
+# dynotable-orm: a TypeScript DynamoDB ORM and dynamoose alternative
 
-A type-safe, fast DynamoDB ORM for TypeScript, and a successor to dynamoose.
+A type-safe, fast DynamoDB ORM for TypeScript. Define each model with Zod or any Standard Schema, and keys,
+updates, conditions and queries are typed from it. It reads and writes tables that dynamoose wrote, and a
+codemod moves dynamoose code over.
 
 - **dynamoose call shapes.** `get`, `create`, `update`, `query`, `scan`, conditions, transactions and batches
   keep the shapes you know. Your schema gives the types: keys, update paths, condition values, index names.
@@ -10,10 +12,11 @@ A type-safe, fast DynamoDB ORM for TypeScript, and a successor to dynamoose.
   [migration guide](docs/migration-from-dynamoose.md#allowlisted-differences).
 - **Any Standard Schema validates.** The Zod 4 adapter adds keys, indexes, Date storage and per-path checks
   on updates. Refinements run on every whole-item write.
-- **Fast.** In a CPU benchmark on a stub client (measured 2026-11-06), a create, get or update on a schema
-  of about 60 attributes is 93 to 854 times faster than dynamoose 4.2.0, and as fast as hand-written AWS SDK
-  code or faster. On a 5-attribute schema, hand-written SDK code is faster on some calls. See
-  [benchmarks](docs/benchmarks.md).
+- **Fast.** In a CPU benchmark on a stub client (measured 2026-11-06), a create or update on a schema of
+  about 60 attributes is 93 to 854 times faster than dynamoose 4.2.0, and as fast as hand-written AWS SDK
+  code or faster. On a 5-attribute schema, hand-written SDK code is faster on some calls. On reads,
+  dynamoose type-checks each attribute and dynotable-orm runs no check, so those numbers compare different
+  work. See [benchmarks](docs/benchmarks.md).
 - **A codemod** moves dynamoose code over and marks what it cannot move with a TODO.
 
 <picture>
@@ -79,7 +82,7 @@ console.log(user?.plan, found.count);
 `create` writes only when the key is not stored yet; pass `{overwrite: true}` to replace. `User.update` with
 a wrong path or value type does not compile.
 
-## Migrate from dynamoose
+## Migrate from dynamoose to TypeScript and Zod
 
 The codemod rewrites dynamoose call sites and converts each dynamoose `Schema` to a Zod schema plus model
 options. It marks what it cannot convert with a TODO comment.
