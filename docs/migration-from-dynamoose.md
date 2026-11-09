@@ -1,6 +1,7 @@
 # Migrating from dynamoose
 
-dynotable-orm keeps dynamoose 4.x's call shapes, and the stored bytes of whole items and top-level updates.
+dynotable-orm keeps dynamoose 4.x's call shapes, and the stored bytes of whole items and of top-level updates,
+apart from three top-level edge cases (D9, D10 and D14).
 This guide lists what changes. The codemod does most of the work, and marks the rest with a TODO.
 
 The stored bytes are checked against dynamoose 4.2.0 from npm. An update of a nested path does not store the
@@ -11,13 +12,15 @@ same item (see [Updates](#updates)), and a table whose Dates are not in millisec
 ## What stays the same
 
 - **Stored items.** For the same schema and input, a whole-item write (`create`, `save`, `batchPut`, a
-  transaction put) and a top-level update store the same bytes as dynamoose 4.2.0. An equivalence suite writes
+  transaction put) and a top-level update store the same bytes as dynamoose 4.2.0, apart from D9, D10 and D14.
+  An equivalence suite writes
   each case through both libraries on DynamoDB Local, compares the raw items, and has each library read the
   other's items. An update of a nested path does not store the same item: dynamoose 4.2.0 writes `{$SET:
-{'a.b': 1}}` as a top-level attribute named `a.b` (D3, D4 and D10 in the
+{'a.b': 1}}` as a top-level attribute named `a.b` (D3 and D4 in the
   [allowlisted differences](#allowlisted-differences)). So a table that dynamoose code updated by nested paths
-  can hold such attributes: look for them before you move. While old and new code share a table, make
-  nested-path updates on one side only.
+  can hold such attributes: look for them before you move. dynotable-orm drops them on read (D12), so a read
+  followed by a write of the whole item removes them. While old and new code share a table, make nested-path
+  updates from dynotable-orm only.
 - **Table names.** `${prefix}${name}${suffix}`.
 - **Call shapes.** `get(key)`, `create(item)`, `update(key, changes)` and `update(item)`, `delete(key)`, the
   query and scan chains, the `Condition` chain (with `ne`), raw `{ConditionExpression, …}` objects,
@@ -638,10 +641,12 @@ items. These are the known differences on the same input, numbered as the entrie
 differs. The [stricter checks](#stricter-checks) are differences too: each one throws where dynamoose did
 something else.
 
-Whole-item writes (`create`, `save`, a put, batches, transactions) and top-level updates store the same
-bytes. An update of a nested path does not: D3, D4 and D10 store something else for the same call, and D5 to
-D9 are calls that one library refuses and the other writes. While old and new code share a table, keep
-nested-path updates on one side.
+Whole-item writes (`create`, `save`, a put, batches, transactions) store the same bytes. Top-level updates do
+too, except D9, D10 and D14: D10 stores a list where dynamoose 4.2.0 stores a string set, and D9 and D14 are
+top-level calls that one side writes and the other refuses or DynamoDB rejects. An update of a nested path
+does not store the same item: D3 and D4 store something else for the same call, and D5 to D8 are calls that
+one library refuses and the other writes. While old and new code share a table, make nested-path updates from
+dynotable-orm only, because it drops dynamoose's `a.b` attributes on read (D12).
 
 1. **D1. Date storage.** With no storage setting, both store a `Date` and the timestamps as epoch
    milliseconds. `defaultDateStorage` sets the storage of a whole model; dynamoose sets it per attribute. No

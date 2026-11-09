@@ -7,7 +7,8 @@ codemod moves dynamoose code over.
 - **dynamoose call shapes.** `get`, `create`, `update`, `query`, `scan`, conditions, transactions and batches
   keep the shapes you know. Your schema gives the types: keys, update paths, condition values, index names.
 - **The same stored bytes.** Whole-item writes and top-level updates store the same bytes as dynamoose 4.2.0,
-  as an equivalence suite checks on DynamoDB Local. An update of a nested path does not: dynamoose writes it
+  apart from three top-level edge cases, as an equivalence suite checks on DynamoDB Local. An update of a
+  nested path does not: dynamoose writes it
   as a top-level attribute named by the path. The known differences are in the
   [migration guide](docs/migration-from-dynamoose.md#allowlisted-differences).
 - **Any Standard Schema validates.** The Zod 4 adapter adds keys, indexes, Date storage and per-path checks

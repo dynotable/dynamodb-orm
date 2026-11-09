@@ -1,7 +1,8 @@
 # Benchmarks
 
 These numbers measure the CPU that a call costs inside the process. A stub client returns canned responses,
-so they contain no network time. In a real call, DynamoDB's latency is usually larger than any of them.
+so they contain no network time. In a real call, DynamoDB's latency is usually larger than the
+dynotable-orm and hand-written SDK numbers.
 
 How to run the benchmark, and the details of each contender and operation, are in
 [`packages/dynotable-orm/benchmarks/README.md`](../packages/dynotable-orm/benchmarks/README.md).
