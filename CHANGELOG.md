@@ -2,6 +2,14 @@
 
 All notable changes to `dynotable-orm` and `dynotable-orm-codemod` are recorded here.
 
+## 0.1.2
+
+### dynotable-orm
+
+- Docs only. The package description and README call the library a dynamoose alternative.
+- The README speed claim covers create and update only. On reads, dynamoose type-checks each attribute and
+  dynotable-orm runs no check, so those numbers compare different work.
+
 ## 0.1.1
 
 ### dynotable-orm
