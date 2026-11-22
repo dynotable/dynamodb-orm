@@ -215,7 +215,8 @@ const projection = (project: IndexPlan['project']): Projection =>
 
 /**
  * Defines a model. Every type of the model is inferred from `schema` and `options`, so you write no interface:
- * the item (`ItemOf`), the key (`KeyInputOf`), the changes `update` takes (`UpdateInputOf`) and the index names.
+ * the item (`ItemOf`), the key (`KeyInputOf`), what `create` takes (`CreateInputOf`), the changes `update` takes
+ * (`UpdateInputOf`) and the index names.
  * Keys, indexes, dates and timestamps are resolved now, so a bad definition throws here.
  */
 export function model<

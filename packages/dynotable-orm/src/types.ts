@@ -133,7 +133,11 @@ type KeyFields<T, K> = {[P in K & keyof T]-?: Exclude<T[P], undefined>};
  */
 export type ItemOf<M extends AnyModel> = TypesOf<M>['item'];
 
-/** A key object, or a bare scalar for a model with only a hash key. */
+/**
+ * The key `get`, `update` and `delete` take, as `KeyInputOf<typeof M>`: an object with the hash key and the range
+ * key. A model with only a hash key also takes the bare value. The key attributes come from the field marks or
+ * from the `hashKey` and `rangeKey` options.
+ */
 export type KeyInputOf<M extends AnyModel> =
   IsAny<TypesOf<M>> extends true
     ? any
@@ -148,7 +152,11 @@ export type KeyInputOf<M extends AnyModel> =
  */
 export type CreateInputOf<M extends AnyModel> = Partial<TypesOf<M>['input']>;
 
-/** What `update` takes: the schema's input, which it parses. */
+/**
+ * The changes `update` takes, as `UpdateInputOf<typeof M>`. Each top-level field is an implicit `$SET` with its
+ * input type. `$SET`, `$REMOVE`, `$ADD` and `$DELETE` take paths and values typed by the schema. `$ADD` takes only
+ * a number, a Set or a list path.
+ */
 export type UpdateInputOf<M extends AnyModel> = UpdateInput<TypesOf<M>['input']>;
 
 export type IsAny<T> = 0 extends 1 & T ? true : false;
