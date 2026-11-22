@@ -22,6 +22,7 @@ export type {
   CallOptions,
   ConditionFailureOptions,
   ConditionInput,
+  CreateInputOf,
   CreateOptions,
   DeleteOptions,
   GetOptions,

@@ -1,7 +1,14 @@
 import {describe, expectTypeOf, it} from 'vitest';
 import {z} from 'zod';
 import type {AttributeValue} from '@aws-sdk/client-dynamodb';
-import {type Condition, type ItemOf, type KeyInputOf, model, transaction} from '../src/index.js';
+import {
+  type Condition,
+  type CreateInputOf,
+  type ItemOf,
+  type KeyInputOf,
+  model,
+  transaction
+} from '../src/index.js';
 import {hashKey} from '../src/zod/index.js';
 
 const schema = z.object({
@@ -28,6 +35,13 @@ describe('model types', () => {
     // @ts-expect-error the hash key is a string
     void HashOnly.get(1);
     expectTypeOf<KeyInputOf<typeof Composite>>().toEqualTypeOf<{id: string; sk: number}>();
+  });
+
+  // CreateInputOf is a separate alias of the create parameter type, so this pins the two together.
+  it('names what create takes', () => {
+    expectTypeOf<CreateInputOf<typeof Composite>>().toEqualTypeOf<
+      Parameters<typeof Composite.create>[0]
+    >();
   });
 
   it('narrows the item to the requested attributes', async () => {

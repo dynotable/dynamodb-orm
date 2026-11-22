@@ -1,6 +1,7 @@
 import {describe, expectTypeOf, it} from 'vitest';
 import {z} from 'zod';
 import type {
+  CreateInputOf,
   ItemOf,
   KeyInputOf,
   ModelOptions,
@@ -33,6 +34,21 @@ const composite = typed(schema, {hashKey: 'id', rangeKey: 'sk'});
 describe('ItemOf', () => {
   it('is the schema output', () => {
     expectTypeOf<ItemOf<typeof hashOnly>>().toEqualTypeOf<Item>();
+  });
+});
+
+describe('CreateInputOf', () => {
+  // create parses its input, so a field whose input differs from its output takes the input type here.
+  it('is a Partial of the schema input, not of the item', () => {
+    const coerced = typed(
+      z.object({id: z.string(), n: z.string().transform(Number), on: z.boolean().default(false)}),
+      {hashKey: 'id'}
+    );
+    expectTypeOf<CreateInputOf<typeof coerced>>().toEqualTypeOf<{
+      id?: string;
+      n?: string;
+      on?: boolean | undefined;
+    }>();
   });
 });
 

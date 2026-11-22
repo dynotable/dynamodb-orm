@@ -104,7 +104,10 @@ type FieldIndexes<S> = S extends {readonly shape: infer Shape}
     }[keyof Shape & string]
   : never;
 
-/** Keys and indexes come from the options, else from the fields marked with `hashKey()`/`rangeKey()`/`index()`. */
+/**
+ * The types `model()` infers from schema `S` and options `O`. The item and the input come from the schema. Keys
+ * and indexes come from the options, else from the fields marked with `hashKey()`/`rangeKey()`/`index()`.
+ */
 export type ModelTypesOf<
   S extends StandardSchema,
   O extends ModelOptions<InferOutput<S>>
@@ -124,9 +127,17 @@ export interface AnyModel {
 export type TypesOf<M extends AnyModel> = NonNullable<M['~types']>;
 type KeyFields<T, K> = {[P in K & keyof T]-?: Exclude<T[P], undefined>};
 
+/**
+ * The item a read returns, as `ItemOf<typeof M>`: the schema's output type, as `z.infer<typeof schema>` gives it.
+ * A write takes the schema's input type, which `.default()`, `.transform()` and `z.coerce` make differ.
+ */
 export type ItemOf<M extends AnyModel> = TypesOf<M>['item'];
 
-/** A key object, or a bare scalar for a model with only a hash key. */
+/**
+ * The key `get`, `update` and `delete` take, as `KeyInputOf<typeof M>`: an object with the hash key and the range
+ * key. A model with only a hash key also takes the bare value. The key attributes come from the field marks or
+ * from the `hashKey` and `rangeKey` options.
+ */
 export type KeyInputOf<M extends AnyModel> =
   IsAny<TypesOf<M>> extends true
     ? any
@@ -134,7 +145,18 @@ export type KeyInputOf<M extends AnyModel> =
       ? KeyFields<ItemOf<M>, TypesOf<M>['hash']> | ItemOf<M>[TypesOf<M>['hash']]
       : KeyFields<ItemOf<M>, TypesOf<M>['hash'] | TypesOf<M>['range']>;
 
-/** What `update` takes: the schema's input, which it parses. */
+/**
+ * What `create` takes, as `CreateInputOf<typeof M>`: a `Partial` of the schema's input, which it parses. A field
+ * with `.default()` is optional here and present on `ItemOf`. A missing required field compiles, and the runtime
+ * check rejects it.
+ */
+export type CreateInputOf<M extends AnyModel> = Partial<TypesOf<M>['input']>;
+
+/**
+ * The changes `update` takes, as `UpdateInputOf<typeof M>`. Each top-level field is an implicit `$SET` with its
+ * input type. `$SET`, `$REMOVE`, `$ADD` and `$DELETE` take paths and values typed by the schema. `$ADD` takes only
+ * a number, a Set or a list path.
+ */
 export type UpdateInputOf<M extends AnyModel> = UpdateInput<TypesOf<M>['input']>;
 
 export type IsAny<T> = 0 extends 1 & T ? true : false;
