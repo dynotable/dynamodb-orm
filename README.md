@@ -83,6 +83,57 @@ console.log(user?.plan, found.count);
 `create` writes only when the key is not stored yet; pass `{overwrite: true}` to replace. `User.update` with
 a wrong path or value type does not compile.
 
+## Types from the schema
+
+Define the shape of an item once, as a schema. You write no interface: `model()` infers every type of the
+model from the schema and its marks. The same schema validates each whole-item write at runtime, and with
+the Zod adapter each update too. When you change a field, the types and the validation change together.
+
+```ts
+import {model, type ItemOf, type KeyInputOf, type UpdateInputOf} from 'dynotable-orm';
+import {extendZod} from 'dynotable-orm/zod';
+import {z} from 'zod';
+
+extendZod(z);
+
+export const Task = model(
+  'Task',
+  z.object({
+    projectId: z.string().hashKey(),
+    taskId: z.string().rangeKey(),
+    status: z.enum(['open', 'done']).default('open'),
+    points: z.number().int()
+  })
+);
+
+export type Task = ItemOf<typeof Task>; // {projectId: string; taskId: string; status: 'open' | 'done'; points: number}
+export type TaskKey = KeyInputOf<typeof Task>; // {projectId: string; taskId: string}
+export type TaskChanges = UpdateInputOf<typeof Task>; // each path with its value type, plus $SET, $ADD, ...
+
+const key: TaskKey = {projectId: 'p1', taskId: 't1'};
+const task: Task | undefined = await Task.get(key);
+console.log(task?.status);
+
+// @ts-expect-error: the key needs taskId, the range key
+await Task.get({projectId: 'p1'});
+
+// @ts-expect-error: points is a number
+await Task.update(key, {points: '3'});
+```
+
+| type                             | what it is                                                                       |
+| -------------------------------- | -------------------------------------------------------------------------------- |
+| `ItemOf<typeof M>`               | the item a read returns: the schema's output type, as `z.infer` gives it         |
+| `KeyInputOf<typeof M>`           | the key `get`, `update` and `delete` take, from the hash key and range key marks |
+| `UpdateInputOf<typeof M>`        | what `update` takes: each path with its value type, and the update operators     |
+| `Parameters<typeof M.create>[0]` | what `create` takes: a `Partial` of the schema's input type                      |
+
+A write takes the schema's input type and a read returns its output type, so a `.default()` field is
+optional on `create` and always present on a read. `timestamps: true` adds no field to the types: declare
+`createdAt` and `updatedAt` in the schema. Without the Zod adapter, the item type still comes from the schema,
+and the keys and indexes come from the model options. The
+[Zod adapter docs](https://dynotable.com/orm/zod#types-from-the-schema) have the full rules.
+
 ## Migrate from dynamoose to TypeScript and Zod
 
 The codemod rewrites dynamoose call sites and converts each dynamoose `Schema` to a Zod schema plus model

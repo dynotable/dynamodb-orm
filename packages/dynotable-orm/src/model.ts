@@ -213,7 +213,11 @@ const projection = (project: IndexPlan['project']): Projection =>
       ? {ProjectionType: 'KEYS_ONLY'}
       : {ProjectionType: 'INCLUDE', NonKeyAttributes: [...project]};
 
-/** Defines a model. Keys, indexes, dates and timestamps are resolved now, so a bad definition throws here. */
+/**
+ * Defines a model. Every type of the model is inferred from `schema` and `options`, so you write no interface:
+ * the item (`ItemOf`), the key (`KeyInputOf`), the changes `update` takes (`UpdateInputOf`) and the index names.
+ * Keys, indexes, dates and timestamps are resolved now, so a bad definition throws here.
+ */
 export function model<
   const N extends string,
   S extends StandardSchema,
