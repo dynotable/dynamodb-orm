@@ -2,6 +2,15 @@
 
 All notable changes to `dynotable-orm` and `dynotable-orm-codemod` are recorded here.
 
+## 0.2.0
+
+### dynotable-orm
+
+- New type `CreateInputOf<typeof M>`: what `create` takes, a `Partial` of the schema's input type. It joins
+  `ItemOf`, `KeyInputOf` and `UpdateInputOf`, so each type a model infers has a name.
+- TSDoc on `model()`, `ItemOf`, `KeyInputOf`, `UpdateInputOf`, `CreateInputOf` and `ModelTypesOf`.
+- The README explains that the schema is the one source of every type.
+
 ## 0.1.2
 
 ### dynotable-orm
