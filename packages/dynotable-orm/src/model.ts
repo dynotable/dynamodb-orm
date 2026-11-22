@@ -32,7 +32,6 @@ import type {
   CallOptions,
   ConditionFailureOptions,
   ConditionInput,
-  CreateInputOf,
   CreateOptions,
   DeleteOptions,
   GetOptions,
@@ -47,7 +46,7 @@ import type {
 } from './types.js';
 
 /** A write parses the item, so it takes the schema's input. */
-type WriteItem<T extends Types> = CreateInputOf<{readonly '~types'?: T}>;
+type WriteItem<T extends Types> = Partial<T['input']>;
 type Attribute<T extends Types> = keyof T['item'] & string;
 type Key<T extends Types> = KeyInputOf<{readonly '~types'?: T}>;
 type KeyObject<T extends Types> = Exclude<Key<T>, string | number | bigint | Uint8Array>;
