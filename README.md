@@ -90,7 +90,13 @@ model from the schema and its marks. The same schema validates each whole-item w
 the Zod adapter each update too. When you change a field, the types and the validation change together.
 
 ```ts
-import {model, type ItemOf, type KeyInputOf, type UpdateInputOf} from 'dynotable-orm';
+import {
+  model,
+  type CreateInputOf,
+  type ItemOf,
+  type KeyInputOf,
+  type UpdateInputOf
+} from 'dynotable-orm';
 import {extendZod} from 'dynotable-orm/zod';
 import {z} from 'zod';
 
@@ -109,8 +115,11 @@ export const Task = model(
 export type Task = ItemOf<typeof Task>; // {projectId: string; taskId: string; status: 'open' | 'done'; points: number}
 export type TaskKey = KeyInputOf<typeof Task>; // {projectId: string; taskId: string}
 export type TaskChanges = UpdateInputOf<typeof Task>; // each path with its value type, plus $SET, $ADD, ...
+export type NewTask = CreateInputOf<typeof Task>; // status is optional here
 
 const key: TaskKey = {projectId: 'p1', taskId: 't1'};
+const draft: NewTask = {...key, points: 3};
+await Task.create(draft);
 const task: Task | undefined = await Task.get(key);
 console.log(task?.status);
 
@@ -121,12 +130,12 @@ await Task.get({projectId: 'p1'});
 await Task.update(key, {points: '3'});
 ```
 
-| type                             | what it is                                                                       |
-| -------------------------------- | -------------------------------------------------------------------------------- |
-| `ItemOf<typeof M>`               | the item a read returns: the schema's output type, as `z.infer` gives it         |
-| `KeyInputOf<typeof M>`           | the key `get`, `update` and `delete` take, from the hash key and range key marks |
-| `UpdateInputOf<typeof M>`        | what `update` takes: each path with its value type, and the update operators     |
-| `Parameters<typeof M.create>[0]` | what `create` takes: a `Partial` of the schema's input type                      |
+| type                      | what it is                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------- |
+| `ItemOf<typeof M>`        | the item a read returns: the schema's output type, as `z.infer` gives it         |
+| `KeyInputOf<typeof M>`    | the key `get`, `update` and `delete` take, from the hash key and range key marks |
+| `UpdateInputOf<typeof M>` | what `update` takes: each path with its value type, and the update operators     |
+| `CreateInputOf<typeof M>` | what `create` takes: a `Partial` of the schema's input type                      |
 
 A write takes the schema's input type and a read returns its output type, so a `.default()` field is
 optional on `create` and always present on a read. `timestamps: true` adds no field to the types: declare

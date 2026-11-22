@@ -141,6 +141,13 @@ export type KeyInputOf<M extends AnyModel> =
       ? KeyFields<ItemOf<M>, TypesOf<M>['hash']> | ItemOf<M>[TypesOf<M>['hash']]
       : KeyFields<ItemOf<M>, TypesOf<M>['hash'] | TypesOf<M>['range']>;
 
+/**
+ * What `create` takes, as `CreateInputOf<typeof M>`: a `Partial` of the schema's input, which it parses. A field
+ * with `.default()` is optional here and present on `ItemOf`. A missing required field compiles, and the runtime
+ * check rejects it.
+ */
+export type CreateInputOf<M extends AnyModel> = Partial<TypesOf<M>['input']>;
+
 /** What `update` takes: the schema's input, which it parses. */
 export type UpdateInputOf<M extends AnyModel> = UpdateInput<TypesOf<M>['input']>;
 
